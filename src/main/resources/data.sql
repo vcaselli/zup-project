@@ -1,0 +1,1 @@
+INSERT INTO User (name,cpf,email) VALUES ('John Doe', '04057884017', 'johndoe@xpto.com'); 
