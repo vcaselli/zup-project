@@ -2,11 +2,17 @@ package br.com.victorcaselli.projetozup.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import br.com.victorcaselli.projetozup.enums.Roles;
 
 @Entity
 public class User implements Serializable {
@@ -17,8 +23,12 @@ public class User implements Serializable {
 	private long id; 
 	private String name; 
 	private String email; 
+	private String password; 
 	private String cpf;
 	private Date birthDate; 
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="ROLES")
+	private Set<Roles> roles;
 	
 	public User() { 
 		
@@ -48,6 +58,14 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
@@ -62,6 +80,10 @@ public class User implements Serializable {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public Set<Roles> getRoles() {
+		return roles;
 	}
 	
 	
