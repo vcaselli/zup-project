@@ -1,6 +1,7 @@
 package br.com.victorcaselli.projetozup.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,8 @@ public class User implements Serializable {
 	private long id; 
 	private String name; 
 	private String email; 
-	private String cpf; 
+	private String cpf;
+	private Date birthDate; 
 	
 	public User() { 
 		
@@ -52,6 +54,14 @@ public class User implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
 	
 	

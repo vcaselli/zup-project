@@ -24,6 +24,7 @@ public class UserResource {
 	
 	@PostMapping
 	public ResponseEntity<User> save(@RequestBody User object){ 
+		object = service.save(object);
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
 				.path("/{id}")
