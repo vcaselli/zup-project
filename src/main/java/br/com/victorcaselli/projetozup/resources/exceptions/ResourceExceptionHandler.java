@@ -7,16 +7,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.victorcaselli.projetozup.services.exceptions.AuthorizationException;
+import br.com.victorcaselli.projetozup.services.exceptions.ForbiddenException;
+import br.com.victorcaselli.projetozup.services.exceptions.UnauthorizedException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
 	
-	@ExceptionHandler(AuthorizationException.class)
-	public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
+	@ExceptionHandler(UnauthorizedException.class)
+	public ResponseEntity<OAuthCustomError> authorization(UnauthorizedException e, HttpServletRequest request) {
 		
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Email ou CPF já existente", e.getMessage(), request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+		OAuthCustomError error = new OAuthCustomError("Unauthorized", e.getMessage());
+		
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+	}
+	
+	@ExceptionHandler(ForbiddenException.class)
+	public ResponseEntity<OAuthCustomError> authorization(ForbiddenException e, HttpServletRequest request) {
+		
+		OAuthCustomError error = new OAuthCustomError("Forbidden", e.getMessage());
+		
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
 	}
 
 }

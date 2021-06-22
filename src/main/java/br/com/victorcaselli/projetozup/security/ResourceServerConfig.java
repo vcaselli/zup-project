@@ -27,11 +27,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Autowired
 	private JwtTokenStore tokenStore;
 	
-	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
+	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**", "/users/new" };
 	
-	private static final String[] COMMON = { "/users/**" };
-	
-	private static final String[] PUBLIC_POST = {"/users/new"};
+	private static final String[] COMMON = { "/users" };
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -49,7 +47,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(PUBLIC).permitAll()
 		.antMatchers(HttpMethod.GET, COMMON).authenticated()
 		.antMatchers(COMMON).hasAnyRole("COMMON")
-		.antMatchers(HttpMethod.POST,PUBLIC_POST).permitAll()
 		.anyRequest().authenticated();
 		
 		http.cors().configurationSource(corsConfigurationSource());

@@ -26,14 +26,14 @@ public class UserResource {
 	}
 	
 	@PostMapping("/new")
-	public ResponseEntity<User> save(@RequestBody User object){ 
+	public ResponseEntity<UserDTO> save(@RequestBody User object){ 
 		object = service.save(object);
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
 				.path("/{id}")
 				.buildAndExpand(object.getId())
 				.toUri();
-		return ResponseEntity.created(uri).body(object);
+		return ResponseEntity.created(uri).body(new UserDTO(object));
 	}
 	
 	@GetMapping

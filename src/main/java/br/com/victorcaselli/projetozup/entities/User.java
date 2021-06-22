@@ -2,6 +2,7 @@ package br.com.victorcaselli.projetozup.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -31,18 +32,19 @@ public class User implements Serializable {
 	private Date birthDate; 
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="ROLES")
-	private Set<Roles> roles;
+	private Set<Roles> roles = new HashSet<>();
 	
 	public User() { 
 		
 	}
 	
 	public User(User user) {
-		this.name = user.name; 
-		this.email = user.name; 
-		this.password = user.password;
-		this.cpf = user.cpf; 
-		this.birthDate = user.birthDate;
+		this.name = user.getName();
+		this.email = user.getEmail();
+		this.password = user.getPassword();
+		this.cpf = user.getCpf();
+		this.birthDate = user.getBirthDate();
+		this.roles.add(Roles.COMMON);
 	}
 
 	public long getId() {

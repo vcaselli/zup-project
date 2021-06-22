@@ -9,29 +9,33 @@ import br.com.victorcaselli.projetozup.entities.User;
 import br.com.victorcaselli.projetozup.entities.dto.UserDTO;
 import br.com.victorcaselli.projetozup.entities.enums.Roles;
 import br.com.victorcaselli.projetozup.repositories.UserRepository;
+import br.com.victorcaselli.projetozup.services.security.AuthService;
 
 @Service
 public class UserService {
 	
 	
 	private final UserRepository repository;
+	private final AuthService authService;
 	
 	
-	public UserService(UserRepository repository) {
-		this.repository = repository; 
+	public UserService(UserRepository repository, AuthService authService) {
+		this.repository = repository;
+		this.authService = authService; 
 	}
 	
 	@Transactional
 	public User save(User object) { 
 		User user = new User(object); 
-		user.getRoles().add(Roles.COMMON);
 		return this.repository.save(user);
 
 	}
 	
 	@Transactional(readOnly = true)
 	public UserDTO findByEmail(String email) { 
-		return new UserDTO(this.repository.findByEmail(email));
+		User user = this.repository.findByEmail(email);
+		this.authService.validate(user.getId());
+		return new UserDTO(user);
 	}
 	
 	
