@@ -1,5 +1,7 @@
 package br.com.victorcaselli.projetozup.services;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ public class UserService {
 	@Transactional
 	public User save(User object) { 
 		return this.repository.save(object);
+
+		
+		
 	}
 	
 	

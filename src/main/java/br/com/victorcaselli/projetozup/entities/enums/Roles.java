@@ -1,4 +1,4 @@
-package br.com.victorcaselli.projetozup.enums;
+package br.com.victorcaselli.projetozup.entities.enums;
 
 public enum Roles {
 	

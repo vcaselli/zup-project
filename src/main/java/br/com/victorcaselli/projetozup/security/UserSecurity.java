@@ -8,7 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import br.com.victorcaselli.projetozup.entities.User;
-import br.com.victorcaselli.projetozup.enums.Roles;
+import br.com.victorcaselli.projetozup.entities.enums.Roles;
 
 public class UserSecurity implements UserDetails {
 	private static final long serialVersionUID = 1L;

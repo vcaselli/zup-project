@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import br.com.victorcaselli.projetozup.enums.Roles;
+import br.com.victorcaselli.projetozup.entities.enums.Roles;
 
 @Entity
 public class User implements Serializable {
@@ -22,8 +23,10 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id; 
 	private String name; 
+	@Column(unique = true)
 	private String email; 
-	private String password; 
+	private String password;
+	@Column(unique = true)
 	private String cpf;
 	private Date birthDate; 
 	@ElementCollection(fetch=FetchType.EAGER)
