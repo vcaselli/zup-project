@@ -36,6 +36,14 @@ public class User implements Serializable {
 	public User() { 
 		
 	}
+	
+	public User(User user) {
+		this.name = user.name; 
+		this.email = user.name; 
+		this.password = user.password;
+		this.cpf = user.cpf; 
+		this.birthDate = user.birthDate;
+	}
 
 	public long getId() {
 		return id;

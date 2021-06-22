@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.victorcaselli.projetozup.entities.User;
 import br.com.victorcaselli.projetozup.entities.dto.UserDTO;
+import br.com.victorcaselli.projetozup.entities.enums.Roles;
 import br.com.victorcaselli.projetozup.repositories.UserRepository;
 
 @Service
@@ -22,7 +23,9 @@ public class UserService {
 	
 	@Transactional
 	public User save(User object) { 
-		return this.repository.save(object);
+		User user = new User(object); 
+		user.getRoles().add(Roles.COMMON);
+		return this.repository.save(user);
 
 	}
 	

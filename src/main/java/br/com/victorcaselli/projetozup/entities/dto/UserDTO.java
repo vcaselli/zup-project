@@ -1,6 +1,7 @@
 package br.com.victorcaselli.projetozup.entities.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import br.com.victorcaselli.projetozup.entities.User;
 
@@ -12,6 +13,7 @@ public class UserDTO implements Serializable {
 	private String name;
 	private String email; 
 	private String cpf; 
+	private Date birthDate;
 	
 	
 	public UserDTO() { 
@@ -23,6 +25,7 @@ public class UserDTO implements Serializable {
 		this.name = entity.getName(); 
 		this.email = entity.getEmail(); 
 		this.cpf = entity.getCpf(); 
+		this.birthDate = entity.getBirthDate();
 	}
 
 	public Long getId() {
@@ -40,10 +43,10 @@ public class UserDTO implements Serializable {
 	public String getCpf() {
 		return cpf;
 	}
-	
-	
-	
-	
-	
 
+	public Date getBirthDate() {
+		return birthDate;
+	}
+	
+	
 }

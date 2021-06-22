@@ -40,5 +40,8 @@ public class UserResource {
 	public ResponseEntity<UserDTO> findByEmail(@RequestParam(value="email") String email){ 
 		return ResponseEntity.ok().body(this.service.findByEmail(email));
 	}
+	
+	
+	
 
 }
