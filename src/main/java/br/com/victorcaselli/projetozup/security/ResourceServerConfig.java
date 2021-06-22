@@ -29,9 +29,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
 	
-	private static final String[] COMMON = { };
+	private static final String[] COMMON = { "/users/**" };
 	
-	private static final String[] PUBLIC_POST = {"/users/**"};
+	private static final String[] PUBLIC_POST = {"/users/new"};
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -47,7 +47,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
-		.antMatchers(HttpMethod.GET, COMMON).permitAll()
+		.antMatchers(HttpMethod.GET, COMMON).authenticated()
 		.antMatchers(COMMON).hasAnyRole("COMMON")
 		.antMatchers(HttpMethod.POST,PUBLIC_POST).permitAll()
 		.anyRequest().authenticated();

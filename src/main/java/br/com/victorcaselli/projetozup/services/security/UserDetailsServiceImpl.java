@@ -1,4 +1,4 @@
-package br.com.victorcaselli.projetozup.services;
+package br.com.victorcaselli.projetozup.services.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
