@@ -1,8 +1,10 @@
 package br.com.victorcaselli.projetozup.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -13,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import br.com.victorcaselli.projetozup.entities.enums.Roles;
 
@@ -33,6 +36,8 @@ public class User implements Serializable {
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="ROLES")
 	private Set<Roles> roles = new HashSet<>();
+	@OneToMany(mappedBy = "user")
+	private List<Vehicle> vehicles = new ArrayList<>(); 
 	
 	public User() { 
 		
@@ -97,6 +102,10 @@ public class User implements Serializable {
 
 	public Set<Roles> getRoles() {
 		return roles;
+	}
+
+	public List<Vehicle> getVehicles() {
+		return vehicles;
 	}
 	
 	

@@ -10,8 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import br.com.victorcaselli.projetozup.resources.exceptions.model.OAuthCustomError;
+import br.com.victorcaselli.projetozup.resources.exceptions.model.StandardError;
 import br.com.victorcaselli.projetozup.services.exceptions.ForbiddenException;
 import br.com.victorcaselli.projetozup.services.exceptions.UnauthorizedException;
+import br.com.victorcaselli.projetozup.services.exceptions.UserNotNullException;
 import br.com.victorcaselli.projetozup.services.exceptions.UserRecordException;
 import br.com.victorcaselli.projetozup.services.exceptions.VehicleParameterException;
 
@@ -46,6 +49,14 @@ public class ResourceExceptionHandler {
 	public ResponseEntity<StandardError> authorization(UserRecordException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError error = new StandardError(Date.from(Instant.now()).getTime(), status.value() , "Invalid Email or CPF", e.getMessage(), request.getRequestURI());
+		
+		return ResponseEntity.status(status).body(error);
+	}
+	
+	@ExceptionHandler(UserNotNullException.class)
+	public ResponseEntity<StandardError> authorization(UserNotNullException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError error = new StandardError(Date.from(Instant.now()).getTime(), status.value() , "User cannot be null", e.getMessage(), request.getRequestURI());
 		
 		return ResponseEntity.status(status).body(error);
 	}

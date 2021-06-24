@@ -29,7 +29,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**", "/users/new", "/vehicles/**" };
 	
-	private static final String[] COMMON = { "/users" };
+	private static final String[] COMMON = { "/users", "/vehicles/**" };
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {

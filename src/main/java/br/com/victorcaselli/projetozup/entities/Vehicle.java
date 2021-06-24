@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Vehicle implements Serializable{
@@ -22,6 +26,10 @@ public class Vehicle implements Serializable{
 	private String reference; 
 	private Integer vehicleType;
 	private Character fuelChar;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	public Vehicle() { 
 		
@@ -111,6 +119,14 @@ public class Vehicle implements Serializable{
 
 	public void setFuelChar(Character fuelChar) {
 		this.fuelChar = fuelChar;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

@@ -1,4 +1,4 @@
-package br.com.victorcaselli.projetozup.resources.exceptions;
+package br.com.victorcaselli.projetozup.resources.exceptions.model;
 
 import java.io.Serializable;
 
