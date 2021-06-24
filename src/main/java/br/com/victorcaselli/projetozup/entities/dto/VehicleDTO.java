@@ -1,8 +1,13 @@
 package br.com.victorcaselli.projetozup.entities.dto;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonAlias;
 
-public class VehicleDTO {
+import br.com.victorcaselli.projetozup.entities.Vehicle;
+
+public class VehicleDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
 	@JsonAlias(value = "Marca")
 	private String brand;
@@ -72,7 +77,9 @@ public class VehicleDTO {
 	}
 	
 	
-	
+	public Vehicle fromDTO() { 
+		return new Vehicle(null, brand, model, modelYear, fuel, fipeCode, reference, vehicleType, fuelChar);
+	}
 	
 	
 
