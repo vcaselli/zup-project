@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.victorcaselli.projetozup.entities.User;
 import br.com.victorcaselli.projetozup.entities.dto.UserDTO;
-import br.com.victorcaselli.projetozup.entities.enums.Roles;
 import br.com.victorcaselli.projetozup.repositories.UserRepository;
+import br.com.victorcaselli.projetozup.services.exceptions.UserRecordException;
 import br.com.victorcaselli.projetozup.services.security.AuthService;
 
 @Service
@@ -27,7 +27,11 @@ public class UserService {
 	@Transactional
 	public User save(User object) { 
 		User user = new User(object); 
-		return this.repository.save(user);
+		try {
+			return this.repository.save(user);
+		}catch(Exception e) { 
+			throw new UserRecordException(null);
+		}
 
 	}
 	

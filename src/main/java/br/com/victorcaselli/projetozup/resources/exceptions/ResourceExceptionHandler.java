@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.victorcaselli.projetozup.services.exceptions.ForbiddenException;
 import br.com.victorcaselli.projetozup.services.exceptions.UnauthorizedException;
+import br.com.victorcaselli.projetozup.services.exceptions.UserRecordException;
 import br.com.victorcaselli.projetozup.services.exceptions.VehicleParameterException;
 
 @ControllerAdvice
@@ -37,6 +38,14 @@ public class ResourceExceptionHandler {
 	public ResponseEntity<StandardError> authorization(VehicleParameterException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError error = new StandardError(Date.from(Instant.now()).getTime(), status.value() , "Invalid url parameter sequence", e.getMessage(), request.getRequestURI());
+		
+		return ResponseEntity.status(status).body(error);
+	}
+	
+	@ExceptionHandler(UserRecordException.class)
+	public ResponseEntity<StandardError> authorization(UserRecordException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError error = new StandardError(Date.from(Instant.now()).getTime(), status.value() , "Invalid Email or CPF", e.getMessage(), request.getRequestURI());
 		
 		return ResponseEntity.status(status).body(error);
 	}
