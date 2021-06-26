@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.victorcaselli.projetozup.entities.enums.WeeklyRotation;
+
 @Entity
 public class Vehicle implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -30,6 +32,7 @@ public class Vehicle implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
+	private Integer weeklyRotation;
 	
 	public Vehicle() { 
 		
@@ -127,6 +130,14 @@ public class Vehicle implements Serializable{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getWeeklyRotation() {
+		return WeeklyRotation.toEnum(this.weeklyRotation).getDescription();
+	}
+
+	public void setWeeklyRotation(Integer weeklyRotation) {
+		this.weeklyRotation = weeklyRotation;
 	}
 	
 	

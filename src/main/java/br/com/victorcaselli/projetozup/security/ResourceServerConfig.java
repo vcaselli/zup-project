@@ -27,7 +27,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Autowired
 	private JwtTokenStore tokenStore;
 	
-	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**", "/users/new", "/vehicles/**" };
+	private static final String[] PUBLIC = { "/h2-console/**", "/users/new" };
 	
 	private static final String[] COMMON = { "/users", "/vehicles/**" };
 	
@@ -45,8 +45,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
-		.antMatchers(HttpMethod.GET, COMMON).authenticated()
-		.antMatchers(COMMON).hasAnyRole("COMMON")
+		.antMatchers(COMMON).hasAnyRole("COMMON", "ADMIN")
 		.anyRequest().authenticated();
 		
 		http.cors().configurationSource(corsConfigurationSource());
