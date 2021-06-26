@@ -2,6 +2,8 @@ package br.com.victorcaselli.projetozup.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,14 +26,14 @@ public class UserResource {
 	}
 	
 	@PostMapping("/new")
-	public ResponseEntity<UserDTO> save(@RequestBody User object){ 
-		object = service.save(object);
+	public ResponseEntity<UserDTO> save(@Valid @RequestBody UserDTO object){ 
+		User user = service.save(object.fromDTO());
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
 				.path("/{id}")
 				.buildAndExpand(object.getId())
 				.toUri();
-		return ResponseEntity.created(uri).body(new UserDTO(object));
+		return ResponseEntity.created(uri).body(new UserDTO(user));
 	}
 	
 //	@GetMapping

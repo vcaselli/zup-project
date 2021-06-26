@@ -1,6 +1,7 @@
 package br.com.victorcaselli.projetozup.resources.exceptions.model;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 public class StandardError implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -10,6 +11,10 @@ public class StandardError implements Serializable {
 	private String error;
 	private String message;
 	private String path;
+	
+	public StandardError() { 
+		
+	}
 	
 	public StandardError(Long timestamp, Integer status, String error, String message, String path) {
 		super();
@@ -27,7 +32,7 @@ public class StandardError implements Serializable {
 	public void setTimestamp(Long timestamp) {
 		this.timestamp = timestamp;
 	}
-
+	
 	public Integer getStatus() {
 		return status;
 	}

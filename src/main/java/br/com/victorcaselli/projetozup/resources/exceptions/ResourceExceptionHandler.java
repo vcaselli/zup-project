@@ -7,11 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.victorcaselli.projetozup.resources.exceptions.model.OAuthCustomError;
 import br.com.victorcaselli.projetozup.resources.exceptions.model.StandardError;
+import br.com.victorcaselli.projetozup.resources.exceptions.model.ValidationError;
 import br.com.victorcaselli.projetozup.services.exceptions.ForbiddenException;
 import br.com.victorcaselli.projetozup.services.exceptions.UnauthorizedException;
 import br.com.victorcaselli.projetozup.services.exceptions.UserNotNullException;
@@ -60,6 +63,23 @@ public class ResourceExceptionHandler {
 		
 		return ResponseEntity.status(status).body(error);
 	}
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<ValidationError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		ValidationError err = new ValidationError();
+		err.setTimestamp(Date.from(Instant.now()).getTime());
+		err.setStatus(status.value());
+		err.setError("Validation exception");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		
+		for (FieldError f : e.getBindingResult().getFieldErrors()) {
+			err.addError(f.getField(), f.getDefaultMessage());
+		}
+		
+		return ResponseEntity.status(status).body(err);
+	}	
 	
 
 }
