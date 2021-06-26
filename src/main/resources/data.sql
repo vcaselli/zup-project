@@ -1,2 +1,2 @@
-INSERT INTO User (name,cpf,email,birth_date, password) VALUES ('John Doe', '04057884017', 'johndoe@xpto.com',  '1990-07-13T00:00:00.12345Z','$2y$12$VAXKvupZLH1lKcckr7PvnerlbpMnXfxYRt7uHU.ViWpLuERcOsJmq' );
-INSERT INTO Roles (user_id,roles) values(1,0);
+INSERT INTO tb_user (name,cpf,email,birth_date, password) VALUES ('John Doe', '04057884017', 'johndoe@xpto.com',  '1990-07-13T00:00:00.12345Z','$2y$12$VAXKvupZLH1lKcckr7PvnerlbpMnXfxYRt7uHU.ViWpLuERcOsJmq' );
+INSERT INTO tb_roles (user_id,roles) values(1,0);
