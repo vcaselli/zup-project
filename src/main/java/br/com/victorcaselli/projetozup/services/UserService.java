@@ -2,6 +2,7 @@ package br.com.victorcaselli.projetozup.services;
 
 
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,15 +18,17 @@ public class UserService {
 	
 	private final UserRepository repository;
 	private final AuthService authService;
+	private final BCryptPasswordEncoder encoder;
 	
-	
-	public UserService(UserRepository repository, AuthService authService) {
+	public UserService(UserRepository repository, AuthService authService, BCryptPasswordEncoder encoder) {
 		this.repository = repository;
-		this.authService = authService; 
+		this.authService = authService;
+		this.encoder = encoder; 
 	}
 	
 	@Transactional
 	public User save(User object) { 
+		object.setPassword(encoder.encode(object.getPassword()));
 		User user = new User(object); 
 		try {
 			return this.repository.save(user);

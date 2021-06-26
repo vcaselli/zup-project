@@ -16,10 +16,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import br.com.victorcaselli.projetozup.entities.enums.Roles;
 
 @Entity
+@Table(name="tb_user")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -34,7 +36,7 @@ public class User implements Serializable {
 	private String cpf;
 	private Date birthDate; 
 	@ElementCollection(fetch=FetchType.EAGER)
-	@CollectionTable(name="ROLES")
+	@CollectionTable(name="tb_roles")
 	private Set<Roles> roles = new HashSet<>();
 	@OneToMany(mappedBy = "user")
 	private List<Vehicle> vehicles = new ArrayList<>(); 

@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -15,6 +16,7 @@ import br.com.victorcaselli.projetozup.entities.enums.WeeklyRotation;
 import br.com.victorcaselli.projetozup.util.WeeklyRotationTools;
 
 @Entity
+@Table(name="tb_vehicle")
 public class Vehicle implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
