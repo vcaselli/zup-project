@@ -36,6 +36,8 @@ public class VehicleService {
 	
 	@Transactional(readOnly=true)
 	public List<Vehicle> findAllByUser() { 
+//		List<Vehicle> list =  this.auth.authenticated().getVehicles();
+//		list.stream().map()
 		return  this.auth.authenticated().getVehicles();
 	}
 	
