@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.victorcaselli.projetozup.entities.Vehicle;
 import br.com.victorcaselli.projetozup.entities.dto.VehicleDTO;
+import br.com.victorcaselli.projetozup.entities.dto.VehiclePartsDTO;
 import br.com.victorcaselli.projetozup.services.VehicleService;
 import br.com.victorcaselli.projetozup.services.exceptions.UnauthorizedException;
 import br.com.victorcaselli.projetozup.services.exceptions.VehicleParameterException;
@@ -23,10 +24,14 @@ public class FeignVehicleService {
 		
 	}
 	
-	public Vehicle findVehicle(String brand, String years, String finalParam){ 
+	public Vehicle findVehicle(VehiclePartsDTO parts){ 
 		Vehicle vehicle;
+		System.out.println(parts);
+		String brand = parts.getBrand(); 
+		String years = parts.getYear(); 
+		String specific = parts.getSpecific();
 		try {
-			vehicle = this.fipe.findVehicle(brand, years,finalParam).getBody().fromDTO();
+			vehicle = this.fipe.findVehicle(brand, years,specific).getBody().fromDTO();
 		}catch(Exception e) { 
 			throw new VehicleParameterException("Some of the required parameters are incorrect or not found.");
 		}

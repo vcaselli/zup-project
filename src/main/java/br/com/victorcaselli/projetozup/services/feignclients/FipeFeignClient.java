@@ -13,7 +13,7 @@ import br.com.victorcaselli.projetozup.entities.dto.VehicleDTO;
 public interface FipeFeignClient {
 	
 	
-	@GetMapping("/marcas/{brand}/modelos/{years}/anos/{finalParam}")
-	public ResponseEntity<VehicleDTO> findVehicle(@PathVariable String brand,@PathVariable String years , @PathVariable String finalParam);
+	@GetMapping("/marcas/{brand}/modelos/{years}/anos/{specific}")
+	public ResponseEntity<VehicleDTO> findVehicle(@PathVariable String brand,@PathVariable String years , @PathVariable String specific);
 
 }

@@ -6,12 +6,13 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.victorcaselli.projetozup.entities.Vehicle;
+import br.com.victorcaselli.projetozup.entities.dto.VehiclePartsDTO;
 import br.com.victorcaselli.projetozup.services.VehicleService;
 import br.com.victorcaselli.projetozup.services.feignclients.FeignVehicleService;
 
@@ -34,12 +35,8 @@ public class VehicleResource {
 	}
 	
 	@PostMapping("/new")
-	public ResponseEntity<Vehicle> findVehicle(
-			@RequestParam(value="brand") String brand,
-			@RequestParam(value="years") String years, 
-			@RequestParam(value="final") String finalParam
-			){ 
-		Vehicle vehicle = this.fipeService.findVehicle(brand,years,finalParam);
+	public ResponseEntity<Vehicle> findVehicle(@RequestBody VehiclePartsDTO parts){ 
+		Vehicle vehicle = this.fipeService.findVehicle(parts);
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
 				.path("/{id}")
