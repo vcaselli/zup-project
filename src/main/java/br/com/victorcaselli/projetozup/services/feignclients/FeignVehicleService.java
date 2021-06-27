@@ -26,12 +26,12 @@ public class FeignVehicleService {
 	
 	public Vehicle findVehicle(VehiclePartsDTO parts){ 
 		Vehicle vehicle;
-		System.out.println(parts);
 		String brand = parts.getBrand(); 
 		String years = parts.getYear(); 
 		String specific = parts.getSpecific();
+		String vehicleType = parts.getVehicleType();
 		try {
-			vehicle = this.fipe.findVehicle(brand, years,specific).getBody().fromDTO();
+			vehicle = this.fipe.findVehicle(vehicleType, brand, years,specific).getBody().fromDTO();
 		}catch(Exception e) { 
 			throw new VehicleParameterException("Some of the required parameters are incorrect or not found.");
 		}

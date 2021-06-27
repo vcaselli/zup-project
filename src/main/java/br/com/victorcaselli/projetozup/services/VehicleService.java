@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.victorcaselli.projetozup.entities.Vehicle;
 import br.com.victorcaselli.projetozup.repositories.VehicleRepository;
 import br.com.victorcaselli.projetozup.services.security.AuthService;
-import br.com.victorcaselli.projetozup.util.WeeklyRotationTools;
+import br.com.victorcaselli.projetozup.util.WeeklyRotationHandler;
 
 @Service
 public class VehicleService {
@@ -30,7 +30,7 @@ public class VehicleService {
 			throw new UnauthorizedClientException("User cannot be null");
 		}
 		object.setUser(this.auth.authenticated());
-		object.setWeeklyRotation(WeeklyRotationTools.getWeeklyRotationByModelYear(object.getModelYear()));
+		object.setWeeklyRotation(WeeklyRotationHandler.getWeeklyRotationByModelYear(object.getModelYear()));
 		return this.repository.save(object);
 	}
 	
