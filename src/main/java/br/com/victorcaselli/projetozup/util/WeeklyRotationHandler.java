@@ -11,7 +11,7 @@ import java.util.Map;
 
 import br.com.victorcaselli.projetozup.entities.enums.WeeklyRotation;
 
-public class WeeklyRotationTools {
+public class WeeklyRotationHandler {
 	
 	
 	private static Map<List<Integer>, WeeklyRotation> weeklyRotationList = new HashMap<>(); 

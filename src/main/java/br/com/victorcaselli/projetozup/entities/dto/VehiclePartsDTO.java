@@ -8,15 +8,18 @@ public class VehiclePartsDTO implements Serializable {
 	private String brand; 
 	private String year; 
 	private String specific;
+	private String vehicleType; 
 	
 	
 	
 	
-	public VehiclePartsDTO(String brand, String year, String specific) {
+	public VehiclePartsDTO(String brand, String year, String specific, String vehicleType) {
 		super();
 		this.brand = brand;
 		this.year = year;
 		this.specific = specific;
+		this.vehicleType = vehicleType;
+		
 	}
 	public String getBrand() {
 		return brand;
@@ -36,6 +39,13 @@ public class VehiclePartsDTO implements Serializable {
 	public void setSpecific(String specific) {
 		this.specific = specific;
 	}
+	public String getVehicleType() {
+		return vehicleType;
+	}
+	public void setVehicleType(String vehicleType) {
+		this.vehicleType = vehicleType;
+	}
+	
 	
 
 }

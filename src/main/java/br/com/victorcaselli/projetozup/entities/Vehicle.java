@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.victorcaselli.projetozup.entities.enums.WeeklyRotation;
-import br.com.victorcaselli.projetozup.util.WeeklyRotationTools;
+import br.com.victorcaselli.projetozup.util.WeeklyRotationHandler;
 
 @Entity
 @Table(name="tb_vehicle")
@@ -145,7 +145,8 @@ public class Vehicle implements Serializable{
 	}
 
 	public Boolean getRotationState() {
-		return WeeklyRotationTools.onDayOfWeek(WeeklyRotation.toEnum(this.weeklyRotation));
+		this.rotationState = WeeklyRotationHandler.onDayOfWeek(WeeklyRotation.toEnum(this.weeklyRotation));
+		return this.rotationState;
 	}
 	
 	

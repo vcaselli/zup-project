@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import br.com.victorcaselli.projetozup.entities.dto.VehicleDTO;
 
 @Component
-@FeignClient(name = "FipeClient", url = "https://parallelum.com.br/fipe/api/v1/carros")
+@FeignClient(name = "FipeClient", url = "https://parallelum.com.br/fipe/api/v1")
 public interface FipeFeignClient {
 	
 	
-	@GetMapping("/marcas/{brand}/modelos/{years}/anos/{specific}")
-	public ResponseEntity<VehicleDTO> findVehicle(@PathVariable String brand,@PathVariable String years , @PathVariable String specific);
+	@GetMapping("/{vehicleType}/marcas/{brand}/modelos/{years}/anos/{specific}")
+	public ResponseEntity<VehicleDTO> findVehicle(@PathVariable String vehicleType, 
+			@PathVariable String brand,@PathVariable String years , @PathVariable String specific);
 
 }
